@@ -49,5 +49,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@spekta/react-oidc": "^1.0.1"
+  }
 }
