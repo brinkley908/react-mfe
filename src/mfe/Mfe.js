@@ -1,52 +1,55 @@
-import React, { useEffect } from "react";
+import React, { Component } from 'react'
+import { MfeBase } from './MfeBase'
+
+export class Mfe extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            len: 0
+        }
+        this.checkLoading();
+    }
+
+    componentDidMount() {
+        this.checkLoading(500);
+    }
 
 
-export function Mfe({ name, host, history, data, events, token }) {
-    useEffect( () => {
-        const scriptId = `micro-frontend-script-${name}`;
-        //var headers = {};
-        //if (!!token) {
-        //    headers = {
-        //        'Content-Type': 'application/json',
-        //        'Accept': 'application/json',
-        //        'Authorization' : 'bearer ' +  token
-        //    }
-        //}
+    checkLoading(timeout) {
+        const elem = document.getElementById(this.props.name + "-container")
 
-        const renderMicroFrontend = () => {
+        if (elem && elem.childNodes.length > 0) {
+            this.setState({ ...this.state, loading: false, len: timeout })
+        }
+        else {
+            var Me = this;
+            setTimeout(() => {
+                Me.checkLoading(timeout);
+            }, timeout);
+        }
+    }
 
-            window[`render${name}`](`${name}-container`, history, data, events, token);
-        };
-
-        if (document.getElementById(scriptId)) {
-            renderMicroFrontend();
-            return;
+    renderLoading(Component) {
+        if (!!Component && this.state.loading) {
+            return <Component />
         }
 
-        fetch(`${host}/asset-manifest.json`,{ mode: 'no-cors' })
-            .then((res) => res.json())
-            .then((manifest) => {
-                const script = document.createElement("script");
-                script.id = scriptId;
-                script.crossOrigin = "";
-                script.src = `${host}${manifest.files["main.js"]}`;
-                script.onload = () => {
-                    renderMicroFrontend();
-                };
-                document.head.appendChild(script);
-            });
+        return null
+    }
 
-        return () => {
-            window[`unmount${name}`] && window[`unmount${name}`](`${name}-container`);
-        };
-    });
+    render() {
+        const loading = this.renderLoading(this.props.loading)
+        let loader = this.state.loading
+            ? loading
+            : null
 
-    return <main id={`${name}-container`} />;
+        return (
+            <div>
+                {loader}
+                <MfeBase history={this.props.history} host={this.props.host} name={this.props.name} data={this.props.data} events={this.props.events} />
+            </div>
+        );
+    }
 }
-
-
-Mfe.defaultProps = {
-    document,
-    window,
-};
-

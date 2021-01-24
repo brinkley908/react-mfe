@@ -1,10 +1,15 @@
 import React from 'react'
-
-import { ExampleComponent } from '@spekta/react-mfe'
-import '@spekta/react-mfe/dist/index.css'
+import { AuthProvider } from "@spekta/react-oidc";
+import { Customer } from './components/Customer';
+import { BrowserRouter } from "react-router-dom";
+//import '@spekta/react-mfe/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return(
+    <AuthProvider logger={console}>
+        <Customer />
+    </AuthProvider>
+  );
 }
 
 export default App
