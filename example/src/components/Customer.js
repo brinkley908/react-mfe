@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Mfe } from "@spekta/react-mfe";
-import { AuthConsumer } from "@spekta/react-oidc";
-
 
 const Loading = () => {
-    return(
+    return (
         <span>Loading...</span>
     );
 };
@@ -16,13 +14,11 @@ export class Customer extends Component {
         super(props);
     }
 
-
     render() {
         return (
             <div id="profile-partial-service">
-                <Mfe name="Test" host="https://localhost:44306" loading={Loading} />
+                <Mfe id="homepage" name="Test" host={process.env.REACT_APP_MFE_RESOURCE} loading={Loading} />
             </div>
         );
     }
-
 }

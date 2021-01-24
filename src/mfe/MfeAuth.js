@@ -8,10 +8,10 @@ export const MfeAuth = ({ name, host, history, data, events, loading }) => {
             {({ isAuthenticated, getAccessToken }) => {
                 const token = getAccessToken();
                 if (isAuthenticated()) {
-                    return <Mfe history={history} host={host} name={name} data={data} events={events} token={token} />;
+                    return <Mfe  history={history} host={host} name={name} data={data} events={events} loading={loading} token={token} />;
                 }
                 else {
-                    return <></>
+                    return null
                 }
             }}
         </AuthConsumer>
