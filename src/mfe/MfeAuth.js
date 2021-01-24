@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { AuthConsumer } from "@spekta/react-oidc";
-import { Mfe } from "./Mfe";
+import { Mfe }  from "./Mfe";
 
-export const MfeAuth = ({ name, host, history, data, events }) => {
-
+export const MfeAuth = ({ name, host, history, data, events, loading }) => {
     return (
-
         <AuthConsumer>
             {({ isAuthenticated, getAccessToken }) => {
                 const token = getAccessToken();
@@ -19,5 +17,3 @@ export const MfeAuth = ({ name, host, history, data, events }) => {
         </AuthConsumer>
     )
 }
-
-export default MfeAuth;
