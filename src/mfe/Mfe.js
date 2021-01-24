@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { MfeBase } from './MfeBase'
 
 export class Mfe extends Component {
@@ -18,7 +18,8 @@ export class Mfe extends Component {
 
 
     checkLoading(timeout) {
-        const elem = document.getElementById(this.props.name + "-container")
+        const id = !this.props.id ? this.props.name + "-container"  : this.props.id;
+        const elem = document.getElementById(id)
 
         if (elem && elem.childNodes.length > 0) {
             this.setState({ ...this.state, loading: false, len: timeout })
@@ -46,10 +47,10 @@ export class Mfe extends Component {
             : null
 
         return (
-            <div>
+            <Fragment>
                 {loader}
-                <MfeBase history={this.props.history} host={this.props.host} name={this.props.name} data={this.props.data} events={this.props.events} />
-            </div>
+                <MfeBase id={this.props.id} history={this.props.history} host={this.props.host} name={this.props.name} data={this.props.data} events={this.props.events} />
+            </Fragment>
         );
     }
 }

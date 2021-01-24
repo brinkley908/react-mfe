@@ -8,9 +8,10 @@ export class MfeBase extends React.Component {
 
     componentDidMount() {
         const scriptId = `micro-frontend-script-${this.props.name}`;
+        const id = !this.props.id ? this.props.name + "-container"  : this.props.id;
 
         const renderMicroFrontend = () => {
-            window["render" + this.props.name](this.props.name + "-container", this.props.history, this.props.data, this.props.events, this.props.token);
+            window["render" + this.props.name](id, this.props.history, this.props.data, this.props.events, this.props.token);
         };
 
         if (document.getElementById(scriptId)) {
@@ -32,14 +33,17 @@ export class MfeBase extends React.Component {
             });
 
         return () => {
-            window["unmount" + this.props.name] && window["unmount" + this.props.name](this.props.name + "-container");
+            window["unmount" + this.props.name] && window["unmount" + this.props.name](id);
 
         };
     };
 
     render() {
+
+        const id = !this.props.id ? this.props.name + "-container"  : this.props.id;
+
         return (
-            <main id={this.props.name + "-container"} />
+            <main id={id} />
         );
     };
 }
