@@ -7,13 +7,8 @@ const Loading = () => {
     );
 };
 
-export class Customer extends Component {
-    static displayName = Customer.name;
-
-    constructor(props) {
-        super(props);
-    }
-
+export class Home extends Component {
+    static displayName = Home.name;
     render() {
         return (
             <div id="profile-partial-service">

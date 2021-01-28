@@ -16,9 +16,8 @@ export class Mfe extends Component {
         this.checkLoading(500);
     }
 
-
     checkLoading(timeout) {
-        const id = !this.props.id ? this.props.name + "-container"  : this.props.id;
+        const id = !this.props.id ? this.props.name + "-container" : this.props.id;
         const elem = document.getElementById(id)
 
         if (elem && elem.childNodes.length > 0) {
@@ -49,7 +48,7 @@ export class Mfe extends Component {
         return (
             <Fragment>
                 {loader}
-                <MfeBase id={this.props.id} history={this.props.history} host={this.props.host} name={this.props.name} data={this.props.data} events={this.props.events} />
+                <MfeBase id={this.props.id} history={this.props.history} host={this.props.host} name={this.props.name} data={this.props.data} events={this.props.events} token={this.props.token} />
             </Fragment>
         );
     }
