@@ -15,7 +15,7 @@ npm install --save @spekta/react-mfe
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from '@spekta/react-mfe'
+import {Mfe} from '@spekta/react-mfe'
 import '@spekta/react-mfe/dist/index.css'
 
 class Example extends Component {
